@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'bookings/new'
   get 'spas/index'
   devise_for :users
   root to: "spas#home"
@@ -8,7 +9,11 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :spas
+  resources :spas do
+    resources :bookings, only: [:new, :create]
+  end
+
+  resources :bookings, only: [:show, :destroy, :index]
 
 
   # Defines the root path route ("/")
