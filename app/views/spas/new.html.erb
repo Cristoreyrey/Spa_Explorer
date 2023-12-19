@@ -1,0 +1,25 @@
+<%= simple_form_for @spa, html: { multipart: true } do |f| %>
+  <div class="form-group">
+    <%= f.input :name, label: 'Spa Name' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :address, label: 'Address' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :price, label: 'Price' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :rating, label: 'Rating' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :image, as: :file, label: 'Spa Image' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+  </div>
+<% end %>

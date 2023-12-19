@@ -3,13 +3,7 @@ body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #f2f2f2;
   color: #333333;
-}
 
-.hero {
-  background-color: rgb(151, 157, 230);
-  color: #020000;
-  padding: 26px 0;
-  margin-top: 11px;
 }
 
 .container {
@@ -17,13 +11,12 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   padding: 7px;
-  margin-top: 15px;
+  margin-top: 0px;
 }
 
 .banner {
   position: relative;
   overflow: hidden;
-  margin: 20px 0;
   border-radius: 10px;
 
   img {
