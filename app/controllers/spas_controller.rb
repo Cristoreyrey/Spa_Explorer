@@ -4,6 +4,7 @@ class SpasController < ApplicationController
 
 def home
   @spas = Spa.all
+  @user = current_user
 end
 
 
