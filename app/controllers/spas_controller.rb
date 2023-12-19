@@ -25,15 +25,12 @@ end
     @spa = Spa.new(spa_params)
     @spa.user = current_user
     if @spa.save
+      @spa.user.role = "host"
       redirect_to spa_path(@spa)
     else
       render :new, status: :unprocessable_entity
     end
   end
-
-
-
-
 
   def destroy
     @spa = Spa.find(params[:id])

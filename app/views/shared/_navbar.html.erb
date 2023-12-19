@@ -17,12 +17,12 @@
             <%= link_to "Home", "/", class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Bookings", "#", class: "nav-link" %>
+            <%= link_to "Bookings", bookings_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if @user.profile_photo.present? %>
-              <%= cl_image_tag @user.profile_photo.key, height: 30, width: 30, crop: :fill, class:"profile-photo" %>
+            <% if current_user.profile_photo.present? %>
+              <%= cl_image_tag current_user.profile_photo.key, height: 30, width: 30, crop: :fill, class:"profile-photo" %>
             <% else %>
               <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
             <% end %>

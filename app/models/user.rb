@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :spas
+  has_many :bookings # as a guest
+  has_many :spas, through: :bookings # as an owner
   has_one_attached :profile_photo
 
   ROLES = %w[guest host].freeze
