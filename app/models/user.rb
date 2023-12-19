@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :spas
+  has_one_attached :profile_photo
 
   ROLES = %w[guest host].freeze
   # validates :first_name, presence: true
