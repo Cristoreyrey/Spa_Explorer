@@ -11,12 +11,9 @@ class User < ApplicationRecord
   # validates :last_name, presence: true
   # validates :role, presence: true
 
-  enum role: %i[guest host]
-
-  after_create :set_default_role, if: :new_record?
+  after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
     self.role ||= :guest
-    self.save!
   end
 end

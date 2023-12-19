@@ -25,7 +25,6 @@ end
     @spa = Spa.new(spa_params)
     @spa.save
     redirect_to spa_path(@spa)
-
   end
 
 
