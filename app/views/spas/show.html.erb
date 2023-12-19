@@ -8,6 +8,10 @@ Now you can manage bookings and access your Spas dashboard
 <div class="new-spa-container">
 <%= @spa.name %>
 <%= cl_image_tag(@spa.image.key) %>
-<%= @spa.address %>
-<%= @spa.price %>
+<ul>
+<li><%= @spa.address %>.</li>
+<li>  <%= @spa.rating %> Stars </li>
+<li> MXN <%= @spa.price %>$ </li>
+</ul>
+<%= link_to 'Delete this Spa?', spas_path(@spa), method: :delete, data: { confirm: 'Sure? Your Spa will be completely erased' } %>
 </div>

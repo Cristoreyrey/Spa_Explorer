@@ -3,10 +3,10 @@ class SpasController < ApplicationController
   before_action :set_user
 
 
-def home
-  @spas = Spa.all
-  @user = current_user
-end
+  def home
+    @spas = Spa.all
+    @user = current_user
+  end
 
 
   def index
@@ -32,11 +32,24 @@ end
     end
   end
 
+  def edit
+    @spa = Spa.find(params[:id])
+  end
+
+  def update
+    @spa = Spa.find(params[:id])
+    if @spa.update(spa_params)
+      redirect_to @spa, notice: 'Spa was successfully updated!'
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @spa = Spa.find(params[:id])
     @spa.destroy
 
-    redirect_to root_path notice: 'Your Spa was successfully destroyed.'
+    redirect_to root_path notice: 'Spa was successfully erased'
   end
 
 
@@ -49,5 +62,4 @@ end
   def spa_params
     params.require(:spa).permit(:name, :address, :price, :rating, :image)
   end
-
 end
