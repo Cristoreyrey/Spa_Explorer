@@ -1,20 +1,36 @@
 <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row" do %>
-    <% spas.each do |spa| %>
-      <div class="col-4 card m-1 item-animate">
-        <div class="card-img" style="background-image: url(<%= cl_image_path spa&.image&.key %>)"></div>
-        <div class="card-info">
-          <p class="text-title"><%= spa.name %></p>
-          <div class="card-location">
-            <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= spa.address %></p>
-          </div>
+  <% spas.each do |spa| %>
+    <div class="col-4 card m-1 item-animate">
+      <div id="carouselExampleIndicators<%= spa.id %>" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% spa.images.each_with_index do |image, index| %>
+            <div class="carousel-item <%= 'active' if index.zero? %>">
+              <%= image_tag image, class: 'd-block w-100' %>
+            </div>
+          <% end %>
         </div>
-        <div class="card-footer">
-          <span class="text-title">$<%= spa.price %> / day</span>
-          <div class="card-button">
-            <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
-          </div>
-        </div>
-        <%= link_to "Create a booking", new_spa_booking_path(spa) %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<%= spa.id %>" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<%= spa.id %>" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-    <% end %>
+      <div class="card-info">
+        <p class="text-title"><%= spa.name %></p>
+        <div class="card-location">
+          <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= spa.address %></p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="text-title">$<%= spa.price %> / day</span>
+        <div class="card-button">
+          <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+        </div>
+      </div>
+      <%= link_to "Create a booking", new_spa_booking_path(spa) %>
+    </div>
   <% end %>
+<% end %>

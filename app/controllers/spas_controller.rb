@@ -59,6 +59,6 @@ class SpasController < ApplicationController
   end
 
   def spa_params
-    params.require(:spa).permit(:name, :address, :price, :rating, :image)
+    params.require(:spa).permit(:name, :address, :price, :rating, images: [])
   end
 end

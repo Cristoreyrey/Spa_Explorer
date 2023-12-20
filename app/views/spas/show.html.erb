@@ -1,13 +1,36 @@
 <div class="new-spa-container">
-<%= cl_image_tag(@spa.image.key) %>
-<ul class="styled-list">
-<li> Name:  <%= @spa.name %> </li>
-  <li> Address: <%= @spa.address %>.</li>
-  <li> Rating: <%= @spa.rating %> Stars </li>
-  <li> Price: <%= @spa.price %> $ </li>
-</ul>
- <div class="btn-group mt-3">
-  <%= link_to 'Edit Spa', edit_spa_path(@spa), class: 'btn default-btn' %>
-  <%= link_to 'Delete this Spa?', spas_path(@spa), method: :delete, data: { confirm: 'Sure? Your Spa will be completely erased' }, class: 'btn default-btn' %>
-</div>
+  <% if @spa.images.count > 1 %>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <% @spa.images.each_with_index do |image, index| %>
+          <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= 'active' if index.zero? %>"></li>
+        <% end %>
+      </ol>
+      <div class="carousel-inner">
+        <% @spa.images.each_with_index do |image, index| %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <%= cl_image_tag(image.key) %>
+          </div>
+        <% end %>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  <% end %>
+  <ul class="styled-list">
+  <li> Name:  <%= @spa.name %> </li>
+    <li> Address: <%= @spa.address %>.</li>
+    <li> Rating: <%= @spa.rating %> Stars </li>
+    <li> Price: <%= @spa.price %> $ </li>
+  </ul>
+  <div class="btn-group mt-3">
+    <%= link_to 'Edit Spa', edit_spa_path(@spa), class: 'btn default-btn' %>
+    <%= link_to 'Delete this Spa?', spas_path(@spa), method: :delete, data: { confirm: 'Sure? Your Spa will be completely erased' }, class: 'btn default-btn' %>
+  </div>
 </div>
