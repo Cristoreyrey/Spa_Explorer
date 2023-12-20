@@ -1,21 +1,63 @@
-
-</div>
-<div class="container mt-5">
-  <div class="banner">
-    <img src="https://www.lakeaustin.com/content/uploads/2019/11/conde19.jpg" alt="Spa Explorer Banner">
-    <div class="banner-content">
-    <h1> Immerse Yourself with Spa Explorer</h1>
-      <h2>Find the perfect Spa, anywhere around the world</h2>
-      <p>Discover experiences in our curated list of top-notch places </p>
-      <%= link_to 'Become a Host / Add your Spa & Join Us', new_spa_path %>
+<div class="banner mb-3" style="background-image: url(https://images.unsplash.com/photo-1438755582627-221038b62986?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
+    <div class="banner-content p-5">
+      <h2 class="mb-3">Find the Perfect Spa</h2>
+      <h2>Anywhere, Around the World</h2>
+      <p class="fst-italic mt-4">Discover experiences in our curated list of top-notch places </p>
+      <%= link_to 'Become a Host / Add your Spa & Join Us', new_spa_path, class:"default-btn btn text-dark" %>
     </div>
   </div>
+</div>
 
+<div class="row">
+  <div class="p-3 d-flex flex-column col-4" data-controller="toggle-create-spa-form">
+    <button class="btn default-btn mx-auto mb-4" data-action="click->toggle-create-spa-form#fire">Create a Spa</button>
 
-  <div class="grid mt-5">
-
-
+    <div class="registration-form mt-2 mb-3 p-4 d-none" data-toggle-create-spa-form-target="spa_form">
+    <%= simple_form_for @spa, html: { multipart: true } do |f| %>
+      <div class="form-group">
+        <%= f.input :name, label: 'Name' %>
       </div>
 
+      <div class="form-group">
+        <%= f.input :address, label: 'Address' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.input :price, label: 'Price per session/day' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.input :rating, label: 'Stars' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.input :image, as: :file, label: 'Add a main Image' %>
+      </div>
+
+      <div class="form-group d-flex justify-content-center mx-auto">
+        <%= f.button :submit, class: 'btn default-btn btn-lg btn-block' %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="d-flex p-3 col-8">
+    <% @spas.each do |spa| %>
+      <div class="card me-3">
+        <div class="card-img" style="background-image: url(<%= cl_image_path spa&.image&.key %>)"></div>
+        <div class="card-info">
+          <p class="text-title"><%= spa.name %></p>
+          <div class="card-location">
+            <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= spa.address %></p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="text-title">$<%= spa.price %> / day</span>
+          <div class="card-button">
+            <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
