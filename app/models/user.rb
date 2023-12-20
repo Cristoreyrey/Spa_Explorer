@@ -20,4 +20,16 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :guest
   end
+
+  def host?
+    role == 'host'
+  end
+
+  def guest?
+    role == 'guest'
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

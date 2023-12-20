@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   end
 
   resources :bookings, only: [:show, :index, :destroy]
+
+  get 'dashboard', to: 'pages#dashboard'
   # Defines the root path route ("/")
   # root "posts#index"
 end

@@ -7,10 +7,12 @@
   background-color: #f8f9fa;
   /* Background color for the footer */
   padding: 1rem;
-  margin-top: auto;
+  bottom: 0;
+  position: fixed;
 }
 
 
 .navbar-brand img {
   width: 40px;
 }
+

@@ -1,0 +1,77 @@
+<% if current_user.host? %>
+<div class="row">
+  <div class="ms-3 p-5 col-6">
+    <h1 class="text-center mt-3">My Spas</h1>
+      <div class="row">
+      <% current_user.host_spas.each do |spa| %>
+        <div class="card m-3 item-animate col-6">
+          <div class="card-img" style="background-image: url(<%= cl_image_path spa&.image&.key %>)"></div>
+            <div class="card-info">
+              <p class="text-title"><%= spa.name %></p>
+              <div class="card-location">
+                <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= spa.address %></p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-title">$<%= spa.price %> / day</span>
+              <div class="card-button">
+                <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+              </div>
+            </div>
+        <%# <%= link_to "Delete", booking_path(booking), method: :delete, data: { confirm: 'Are you Sure' } %>
+        </div>
+      <% end %>
+      </div>
+  </div>
+  <div class="col p-5">
+    <h1 class="text-center mt-3 mb-3">Spa's bookings</h1>
+      <div class="px-5">
+      <div class="row">
+        <% current_user.host_bookings.each do |booking| %>
+          <div class="card-booking-list col-6 m-2">
+            <p class="cookieHeading"><%= booking.spa.name %></p>
+            <p class="cookieDescription"><%= booking.date %></p>
+            <p class="cookieDescription"><%= booking.guest.first_name %></p>
+            <div class="buttonContainer">
+              <button class="acceptButton">Accept</button>
+              <button class="declineButton">Decline</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% elsif current_user.guest? %>
+    <div class="row">
+      <div class="col-8">
+        <h1 class="text-center">My bookings</h1>
+        <div class="row">
+        <% current_user.guest_bookings.each do |booking| %>
+          <div class="col-6 card m-3 item-animate">
+            <div class="card-img" style="background-image: url(<%= cl_image_path booking.spa&.image&.key %>)"></div>
+            <div class="card-info">
+              <p class="text-title"><%= booking.spa.name %></p>
+              <div class="card-location">
+                <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= booking.spa.address %></p>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span class="text-title">$<%= booking.spa.price %> / day</span>
+              <div class="card-button">
+                <%= booking.spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+              </div>
+            </div>
+          <%= booking.date %>
+        <%= link_to "Delete", booking_path(booking), data: { turbo_method: :delete, turbo_confirm: 'Are you Sure' } %>
+    </div>
+        <% end %>
+        </div>
+      </div>
+      <div class="col-4">
+        <h1 class="text-center">
+          PROFILE INFO
+        </h1>
+      </div-col-6>
+    </div>
+<% end %>

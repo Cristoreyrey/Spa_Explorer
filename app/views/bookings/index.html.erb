@@ -2,6 +2,7 @@
 
 
 <div class="d-flex p-5">
+  <div class="row">
   <% @bookings.each do |booking| %>
     <div class="col-4 card m-3 item-animate">
       <div class="card-img" style="background-image: url(<%= cl_image_path booking.spa&.image&.key %>)"></div>
@@ -18,7 +19,8 @@
           </div>
         </div>
         <%= booking.host.first_name %>
-        <%# <%= link_to "Delete", booking_path(booking), method: :delete, data: { confirm: 'Are you Sure' } %>
+        <%= link_to "Delete", booking_path(booking), data: { turbo_method: :delete, turbo_confirm: 'Are you Sure' } %>
     </div>
   <% end %>
+  </div>
 </div>
