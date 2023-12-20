@@ -1,33 +1,32 @@
 <div class="container mt-3 text-start mb-3">
   <div class="card-host text-center">
-  <h1> Become a Host, add your Spa </h1>
+    <h1> Become a Host, add your Spa </h1>
   </div>
 
-<div class="registration-form mt-2 mb-3" >
-<%= simple_form_for @spa, html: { multipart: true } do |f| %>
-  <div class="form-group mt-3">
-    <%= f.input :name, label: 'The Name of your Spa' %>
-  </div>
+  <div class="registration-form mt-2 mb-3" >
+    <%= simple_form_for @spa, html: { multipart: true } do |f| %>
+      <div class="form-group mt-3">
+        <%= f.input_field :name, label: false, placeholder: 'The Name of your Spa', class="form-control" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.input :address, label: 'The Address' %>
-  </div>
+      <div class="form-group">
+        <%= f.input_field :address, label: false, placeholder: 'The Address', class="form-control" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.input :price, label: 'Add a Price per session/day' %>
-  </div>
+      <div class="form-group">
+        <%= f.input_field :price, label: false, placeholder: 'Add a Price per session/day', class="form-control" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.input :rating, label: 'How many stars?' %>
-  </div>
+      <div class="form-group">
+        <%= f.input_field :rating, label: false, placeholder: 'How many stars?', class="form-control" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.input :image, as: :file, label: 'Add a main Image' %>
+      <div class="form-group">
+        <%= f.file_field :images, as: :file, input_html: { multiple: true }, label: false, placeholder: 'Add Photos' %>
+      </div>
+      <div class="form-group d-flex justify-content-center mb-5">
+        <%= f.button :submit, class: 'btn default-btn' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="form-group d-flex:justify content-center mb-5">
-    <%= f.button :submit, class: 'btn btn-info btn-lg btn-block' %>
-  </div>
-</div>
-<% end %>
 </div>

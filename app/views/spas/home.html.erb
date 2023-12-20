@@ -13,43 +13,60 @@
     <button class="btn default-btn mx-auto mb-4" data-action="click->toggle-create-spa-form#fire">Create a Spa</button>
 
     <div class="registration-form w-75 mt-2 mb-3 p-4 d-none" data-toggle-create-spa-form-target="spa_form">
-    <%= simple_form_for @spa, html: { multipart: true } do |f| %>
-      <div class="form-group">
-        <%= f.input :name, label: 'Name' %>
-      </div>
+      <%= simple_form_for @spa, html: { multipart: true } do |f| %>
+        <div class="form-group mt-3">
+          <%= f.input_field :name, label: false, placeholder: 'The Name of your Spa', class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.input :address, label: 'Address' %>
-      </div>
+        <div class="form-group">
+          <%= f.input_field :address, label: false, placeholder: 'The Address', class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.input :price, label: 'Price per session/day' %>
-      </div>
+        <div class="form-group">
+          <%= f.input_field :price, label: false, placeholder: 'Add a Price per session/day', class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.input :rating, label: 'Stars' %>
-      </div>
+        <div class="form-group">
+          <%= f.input_field :rating, label: false, placeholder: 'How many stars?', class: "form-control" %>
+        </div>
 
-      <div class="form-group">
-        <%= f.input :image, as: :file, label: 'Add a main Image' %>
-      </div>
+        <div class="form-group">
+          <%= f.input :images, as: :file, input_html: { multiple: true }, label: false, placeholder: 'Add Photos' %>
+        </div>
 
-      <div class="form-group d-flex justify-content-center mx-auto">
-        <%= f.button :submit, class: 'btn default-btn btn-lg btn-block' %>
-      </div>
+        <div class="form-group d-flex justify-content-center mb-5">
+          <%= f.button :submit, class: 'btn default-btn' %>
+        </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
 
   <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row" do %>
     <% @spas.each do |spa| %>
       <div class="col-4 card m-1 item-animate">
-      <% if spa.image.attached? %>
-        <div class="card-img" style="background-image: url(<%= cl_image_path(spa.image.key) %>)"></div>
-        <% else %>
-        <div class="card-img" style="background-image: url(https://media.timeout.com/images/105596637/image.jpg)"></div>
-        <% end %>
-
+        <div id="carouselExampleIndicators<%= spa.id %>" class="carousel slide carousel-fade" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <% if spa.images.attached? %>
+              <% spa.images.each_with_index do |image, index| %>
+                <div class="carousel-item <%= 'active' if index.zero? %>">
+                  <%= image_tag image, class: 'd-block w-100' %>
+                </div>
+             <% end %>
+            <% else %>
+              <div class="carousel-item active">
+                <div class="card-img" style="background-image: url(https://media.timeout.com/images/105596637/image.jpg)"></div>
+              </div>
+            <% end %>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators<%= spa.id %>" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators<%= spa.id %>" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
         <div class="card-info">
           <p class="text-title"><%= spa.name %></p>
           <div class="card-location">
@@ -61,8 +78,8 @@
           <div class="card-button">
             <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
           </div>
-        </div>
-        <%= link_to "Book now", new_spa_booking_path(spa), class:"default-btn text-decoration-none w-50 mx-auto mt-3 text-center p-1" %>
+      </div>
+      <%= link_to "Create a booking", new_spa_booking_path(spa) %>
       </div>
     <% end %>
   <% end %>
