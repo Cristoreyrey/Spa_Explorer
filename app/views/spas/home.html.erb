@@ -44,7 +44,12 @@
   <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row" do %>
     <% @spas.each do |spa| %>
       <div class="col-4 card m-1 item-animate">
-        <div class="card-img" style="background-image: url(<%= cl_image_path spa&.image&.key %>)"></div>
+      <% if spa.image.attached? %>
+        <div class="card-img" style="background-image: url(<%= cl_image_path(spa.image.key) %>)"></div>
+        <% else %>
+        <div class="card-img" style="background-image: url(https://media.timeout.com/images/105596637/image.jpg)"></div>
+        <% end %>
+
         <div class="card-info">
           <p class="text-title"><%= spa.name %></p>
           <div class="card-location">

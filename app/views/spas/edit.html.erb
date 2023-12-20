@@ -1,5 +1,5 @@
 <h1>Update Spa features</h1>
-
+<div>
 <%= simple_form_for @spa do |f| %>
   <div class="field">
     <%= f.input :name %>
@@ -19,7 +19,8 @@
 
   <div class="actions">
     <%= f.button :submit %>
-  </div>
+</div>
 <% end %>
+  </div>
 
 <%= link_to 'Go back', spas_path %>

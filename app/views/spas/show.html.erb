@@ -1,17 +1,13 @@
-<h1 class="text-center mt-2 mb-2">Congratulations!
-You created a new Spa
- </h1>
-<h3 class="text-center mt-3 mb- 3">
-Now you can manage bookings and access your Spas dashboard
-</h3>
-
 <div class="new-spa-container">
-<%= @spa.name %>
 <%= cl_image_tag(@spa.image.key) %>
-<ul>
-<li><%= @spa.address %>.</li>
-<li>  <%= @spa.rating %> Stars </li>
-<li> MXN <%= @spa.price %>$ </li>
+<ul class="styled-list">
+<li> Name:  <%= @spa.name %> </li>
+  <li> Address: <%= @spa.address %>.</li>
+  <li> Rating: <%= @spa.rating %> Stars </li>
+  <li> Price: <%= @spa.price %> $ </li>
 </ul>
-<%= link_to 'Delete this Spa?', spas_path(@spa), method: :delete, data: { confirm: 'Sure? Your Spa will be completely erased' } %>
+ <div class="btn-group mt-3">
+  <%= link_to 'Edit Spa', edit_spa_path(@spa), class: 'btn default-btn' %>
+  <%= link_to 'Delete this Spa?', spas_path(@spa), method: :delete, data: { confirm: 'Sure? Your Spa will be completely erased' }, class: 'btn default-btn' %>
+</div>
 </div>
