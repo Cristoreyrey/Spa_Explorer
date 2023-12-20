@@ -10,3 +10,19 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+.item-animate {
+  animation: appear 1s ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

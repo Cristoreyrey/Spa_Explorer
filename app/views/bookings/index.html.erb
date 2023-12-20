@@ -1,1 +1,24 @@
-<h1>BOOKINGSSS</h1>
+<h1 class="text-center mt-3">This are all your bookings, <%= @user.first_name %></h1>
+
+
+<div class="d-flex p-5">
+  <% @bookings.each do |booking| %>
+    <div class="col-4 card m-3 item-animate">
+      <div class="card-img" style="background-image: url(<%= cl_image_path booking.spa&.image&.key %>)"></div>
+        <div class="card-info">
+          <p class="text-title"><%= booking.spa.name %></p>
+          <div class="card-location">
+            <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= booking.spa.address %></p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="text-title">$<%= booking.spa.price %> / day</span>
+          <div class="card-button">
+            <%= booking.spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+          </div>
+        </div>
+        <%= booking.host.first_name %>
+        <%# <%= link_to "Delete", booking_path(booking), method: :delete, data: { confirm: 'Are you Sure' } %>
+    </div>
+  <% end %>
+</div>

@@ -12,7 +12,7 @@
   <div class="p-3 d-flex flex-column col-4" data-controller="toggle-create-spa-form">
     <button class="btn default-btn mx-auto mb-4" data-action="click->toggle-create-spa-form#fire">Create a Spa</button>
 
-    <div class="registration-form mt-2 mb-3 p-4 d-none" data-toggle-create-spa-form-target="spa_form">
+    <div class="registration-form w-75 mt-2 mb-3 p-4 d-none" data-toggle-create-spa-form-target="spa_form">
     <%= simple_form_for @spa, html: { multipart: true } do |f| %>
       <div class="form-group">
         <%= f.input :name, label: 'Name' %>
@@ -41,9 +41,9 @@
     <% end %>
   </div>
 
-  <div class="d-flex row p-3 col-8">
+  <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row" do %>
     <% @spas.each do |spa| %>
-      <div class="card m-2 col-md-6">
+      <div class="col-4 card m-1 item-animate">
       <% if spa.image.attached? %>
         <div class="card-img" style="background-image: url(<%= cl_image_path(spa.image.key) %>)"></div>
         <% else %>
@@ -62,7 +62,7 @@
             <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
           </div>
         </div>
+        <%= link_to "Book now", new_spa_booking_path(spa), class:"default-btn text-decoration-none w-50 mx-auto mt-3 text-center p-1" %>
       </div>
     <% end %>
-  </div>
-</div>
+  <% end %>

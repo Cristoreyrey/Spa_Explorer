@@ -36,7 +36,7 @@
     <%= link_to "Back", :back, class:"default-btn p-2 text-decoration-none text-dark mb-4 w-25 text-center" %>
 
     <div class="text-center mb-3">
-      <%= link_to "Cancel my account", registrations_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"text-decoration-none text-danger default-btn p-2 border-danger" %>
+      <%= link_to "Cancel my account", cancel_user_registration_path, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"text-decoration-none text-danger default-btn p-2 border-danger" %>
     </div>
   </div>
 </div>

@@ -1,19 +1,21 @@
 class BookingsController < ApplicationController
 
   def index
-    @bookings = Booking.all
+    @bookings = current_user.guest_bookings
     @user = current_user
   end
 
   def show
     @booking = Booking.find(params[:id])
     @user = current_user
+    @spa = @booking.spa
   end
 
   def new
-    @user = current_user
     @spa = Spa.find(params[:spa_id])
     @booking = Booking.new
+
+    render turbo_stream: turbo_stream.replace(:spas, partial: "bookings/turbo_frames/new", locals: { spa: @spa, booking: @booking })
   end
 
   def create
@@ -21,10 +23,10 @@ class BookingsController < ApplicationController
     @spa = Spa.find(params[:spa_id])
     @user = current_user
     @booking.spa = @spa
-    @booking.user = @user
+    @booking.guest = @user
 
     if @booking.save
-      redirect_to spa_booking_path(@booking)
+      redirect_to bookings_path, notice: 'Booking was successfully created!'
     else
       render :new, status => :unprocessable_entity
     end
