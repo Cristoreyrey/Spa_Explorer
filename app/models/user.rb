@@ -3,12 +3,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :spas
-  has_many :bookings # as a guest
-  has_many :spas, through: :bookings # as an owner
-  has_one_attached :profile_photo
-
+  # OWNER:
+  has_many :host_spas, foreign_key: :user_id, class_name: 'Spa'
+  has_many :host_bookings, through: :host_spas, source: :bookings
+  # GUEST:
+  has_many :guest_bookings, foreign_key: :user_id, class_name: 'Booking'
+  has_many :guest_spas, through: :guest_bookings, source: :spa
   ROLES = %w[guest host].freeze
+  has_one_attached :profile_photo
   # validates :first_name, presence: true
   # validates :last_name, presence: true
   # validates :role, presence: true

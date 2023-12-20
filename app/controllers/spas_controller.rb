@@ -2,13 +2,11 @@ class SpasController < ApplicationController
   skip_before_action :authenticate_user!, only: :home
   before_action :set_user
 
-
   def home
     @spas = Spa.all
     @user = current_user
     @spa = Spa.new
   end
-
 
   def index
     @spas = Spa.all
@@ -27,7 +25,7 @@ class SpasController < ApplicationController
     @spa.user = current_user
     if @spa.save
       @spa.user.role = "host"
-      redirect_to spa_path(@spa)
+      render turbo_stream: turbo_stream.replace(:spas, partial: "spas/turbo_frames/spas", locals: { spas: Spa.all })
     else
       render :new, status: :unprocessable_entity
     end
