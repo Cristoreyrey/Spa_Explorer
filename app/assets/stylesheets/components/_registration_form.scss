@@ -1,10 +1,13 @@
 .registration-form {
   border-radius: 10px;
   border: 1px solid gray;
-  box-shadow: 2px 2px 2px lightgray;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+}
+
+.container-no-shadow {
+  box-shadow: none;
 }

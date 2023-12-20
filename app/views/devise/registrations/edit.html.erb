@@ -1,6 +1,6 @@
-<div class="container p-5">
+<div class="p-5">
   <h2 class="text-center mb-3">Edit <%= resource_name.to_s.humanize %></h2>
-  <div class="w-50 bg-white p-3 registration-form">
+  <div class="w-25 bg-white p-3 registration-form">
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= f.error_notification %>
 
@@ -36,7 +36,7 @@
     <%= link_to "Back", :back, class:"default-btn p-2 text-decoration-none text-dark mb-4 w-25 text-center" %>
 
     <div class="text-center mb-3">
-      <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"text-decoration-none text-danger default-btn p-2 border-danger" %>
+      <%= link_to "Cancel my account", registrations_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class:"text-decoration-none text-danger default-btn p-2 border-danger" %>
     </div>
   </div>
 </div>
