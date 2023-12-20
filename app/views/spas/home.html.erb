@@ -41,9 +41,9 @@
     <% end %>
   </div>
 
-  <div class="d-flex p-3 col-8">
+  <div class="d-flex row p-3 col-8">
     <% @spas.each do |spa| %>
-      <div class="card me-3">
+      <div class="card m-2 col-md-6">
       <% if spa.image.attached? %>
         <div class="card-img" style="background-image: url(<%= cl_image_path(spa.image.key) %>)"></div>
         <% else %>
