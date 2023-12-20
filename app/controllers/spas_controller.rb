@@ -9,7 +9,6 @@ class SpasController < ApplicationController
     @spa = Spa.new
   end
 
-
   def index
     @spas = Spa.all
   end
