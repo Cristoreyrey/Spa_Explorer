@@ -1,16 +1,46 @@
-<div class="banner mb-3" style="background-image: url(https://images.unsplash.com/photo-1438755582627-221038b62986?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);">
-    <div class="banner-content p-5">
-      <h2 class="mb-3">Find the Perfect Spa</h2>
-      <h2>Anywhere, Around the World</h2>
-      <p class="fst-italic mt-4">Discover experiences in our curated list of top-notch places </p>
-      <%= link_to 'Become a Host / Add your Spa & Join Us', new_spa_path, class:"default-btn btn text-dark" %>
+<div class="banner mb-3">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+    <% if @spas.any? %>
+      <% @spas.first(5).each_with_index do |spa, index| %>
+        <% if spa.images.attached? %>
+          <div class="carousel-item <%= 'active' if index.zero? %>" style="background-image: url(<%= url_for(spa.images.first) %>);">
+            <div class="carousel-caption d-none d-md-block">
+              <h5><%= spa.name %></h5>
+              <p><%= spa.address %></p>
+              <%= link_to 'Book Now', new_spa_booking_path(spa), class: 'btn default-btn' %>
+            </div>
+          </div>
+        <% else %>
+          <div class="carousel-item <%= 'active' if index.zero? %>">
+            <p>No image for this spa</p>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>No spas found</p>
+    <% end %>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="banner-content p-5 text-center">
+    <h2>Anywhere, Around the World</h2>
+    <p class="fst-italic mt-4"> Discover experiences </p>
+    <%= link_to 'Become a Host', new_spa_path, class:"default-btn btn text-dark " %>
   </div>
 </div>
 
 <div class="row">
-  <div class="d-flex flex-column col-4" data-controller="toggle-create-spa-form">
-    <button class="btn default-btn mx-auto mb-4" data-action="click->toggle-create-spa-form#fire">Create a Spa</button>
+  <div class="p-3 d-flex flex-column col-4" data-controller="toggle-create-spa-form">
+    <button class="btn default-btn mx-auto mb-4" data-action="click->toggle-create-spa-form#fire">Open your Spa</button>
+
 
     <div class="registration-form w-75 mt-2 mb-3 p-4 d-none" data-toggle-create-spa-form-target="spa_form">
       <%= simple_form_for @spa, html: { multipart: true } do |f| %>
@@ -20,7 +50,9 @@
 
 
         <div class="form-group">
+
           <%= f.input :price, label: false, placeholder: 'Add a Price per session/day', class: "form-control" %>
+
         </div>
 
         <div class="form-group">
@@ -46,7 +78,8 @@
     </div>
   </div>
 
-  <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row" do %>
+  <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row " do %>
+      <h3 id="explore-title" class="text-center w-100"> Explore </h3>
     <% @spas.each do |spa| %>
       <div class="col-4 card m-1 item-animate">
         <div id="carouselExampleIndicators<%= spa.id %>" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -73,7 +106,7 @@
           </button>
         </div>
         <div class="card-info">
-          <%= link_to spa.name, spa_path(spa), data: { turbo: false }, class:"text-dark text-decoration-none" %>
+          <p class="text-title"><%= spa.name %></p>
           <div class="card-location">
             <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= spa.address %></p>
           </div>
@@ -83,8 +116,8 @@
           <div class="card-button">
             <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
           </div>
+      <%= link_to "Create a booking", new_spa_booking_path(spa) %>
       </div>
-      <%= link_to " Book now", new_spa_booking_path(spa) %>
       </div>
     <% end %>
   <% end %>

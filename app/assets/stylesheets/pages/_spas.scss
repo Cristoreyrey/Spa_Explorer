@@ -68,3 +68,8 @@ ul li {
   margin: 0 auto;
   padding: 10px 0;
 }
+.carousel-item img {
+  height: 300px;
+  width: auto;
+  object-fit: cover;
+}
