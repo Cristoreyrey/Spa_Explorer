@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
   def dashboard
-    @spas = Spa.all
+    @spas = current_user.host_spas
     if params[:query].present?
-        @spas = Spa.search_by_name_and_address(params[:query])
+      @spas = Spa.search_owned(params[:query])
     end
   end
 end

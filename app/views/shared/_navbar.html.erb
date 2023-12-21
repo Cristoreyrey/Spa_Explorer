@@ -10,18 +10,20 @@
 
       <h1 class="d-flex align-items-center justify-content-center mt-2"><%= link_to 'SPA EXPLORER', root_path, class:"text-decoration-none text-dark" %></h1>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto mt-3">
         <% if user_signed_in? %>
         <% if params[:action] != "dashboard" %>
-          <%= form_with url: root_path, method: :get do %>
+        <div class="d-flex">
+          <%= form_with url: root_path, class:"mb-3", method: :get do %>
           <%= text_field_tag :query,
             params[:query],
             placeholder: "Search for a spa",
-            class: "form-control me-2" %>
-          <%= submit_tag "Find Spa" %>
+            class: "form-control me-2 search-input" %>
           <% end %>
+        </div>
           <% end %>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mt-3">
           <li class="nav-item active list-group-item mt-2">
             <%= link_to "Home", "/", class: "nav-link" %>
           </li>

@@ -11,4 +11,10 @@ class Spa < ApplicationRecord
   using: {
     tsearch: { prefix: true }
   }
+
+  pg_search_scope :search_owned,
+  against: %i[name address],
+  using: {
+    tsearch: { prefix: true }
+  }
 end

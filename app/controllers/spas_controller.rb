@@ -3,7 +3,7 @@ class SpasController < ApplicationController
   before_action :set_user
 
   def home
-    @spas = Spa.all
+    @spas = Spa.all.order(created_at: :desc)
     @user = current_user
     @spa = Spa.new
     @spa_map = Spa.geocoded
