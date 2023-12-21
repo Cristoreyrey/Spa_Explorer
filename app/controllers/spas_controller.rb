@@ -6,6 +6,15 @@ class SpasController < ApplicationController
     @spas = Spa.all
     @user = current_user
     @spa = Spa.new
+    @spa_map = Spa.geocoded
+    @markers = @spas.map do |spa|
+      {
+        lat: spa.latitude,
+        lng: spa.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: { spa: spa }),
+        marker_html: render_to_string(partial: 'marker', locals: { spa: spa })
+      }
+    end
   end
 
   def index

@@ -26,7 +26,7 @@ class BookingsController < ApplicationController
     @booking.guest = @user
 
     if @booking.save
-      redirect_to bookings_path, notice: 'Booking was successfully created!'
+      redirect_to dashboard_path, notice: 'Booking was successfully created!'
     else
       render :new, status => :unprocessable_entity
     end
