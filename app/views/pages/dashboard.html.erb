@@ -49,7 +49,7 @@
         <div class="row">
         <% current_user.guest_bookings.each do |booking| %>
           <div class="col-6 card m-3 item-animate">
-            <div class="card-img" style="background-image: url(<%= cl_image_path booking.spa&.image&.key %>)"></div>
+            <div class="card-img" style="background-image: url(<%= cl_image_path booking.spa&.images&.first.key %>)"></div>
             <div class="card-info">
               <p class="text-title"><%= booking.spa.name %></p>
               <div class="card-location">

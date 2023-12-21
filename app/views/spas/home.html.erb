@@ -19,7 +19,10 @@
         </div>
 
         <div class="form-group">
-          <%= f.input_field :address, label: false, placeholder: 'The Address', class: "form-control" %>
+          <%= f.input_field :address,
+                            input_html: { data: {address_autocomplete_target: "address"}},
+                            wrapper_html: { data: { controller: "address-autocomplete", address_autocomplete_api_key_value: ENV['MAPBOX_API_KEY']}},
+                            label: false, placeholder: 'The Address', class: "form-control d-none" %>
         </div>
 
         <div class="form-group">
@@ -39,6 +42,12 @@
         </div>
       <% end %>
     </div>
+
+  <div style="width: 100%; height: 600px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
   </div>
 
   <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row" do %>
@@ -79,7 +88,7 @@
             <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
           </div>
       </div>
-      <%= link_to "Create a booking", new_spa_booking_path(spa) %>
+      <%= link_to " Book now", new_spa_booking_path(spa) %>
       </div>
     <% end %>
   <% end %>
