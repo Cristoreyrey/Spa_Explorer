@@ -15,6 +15,9 @@ class SpasController < ApplicationController
         marker_html: render_to_string(partial: 'marker', locals: { spa: spa })
       }
     end
+    if params[:query].present?
+        @spas = Spa.search_by_name_and_address(params[:query])
+    end
   end
 
   def index

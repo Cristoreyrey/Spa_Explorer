@@ -1,4 +1,12 @@
 <% if current_user.host? %>
+  <%= form_with url: dashboard_path, class:"d-flex", method: :get do %>
+  <%= text_field_tag :query,
+                    params[:query],
+                    placeholder: "Search for your spa",
+                    class:"form-control search-input" %>
+  <%= submit_tag "Search" %>
+  <% end %>
+
 <div class="row">
   <div class="ms-3 p-5 col-6">
     <h1 class="text-center mt-3">My Spas</h1>
