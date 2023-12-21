@@ -1,26 +1,30 @@
-<h1>Update Spa features</h1>
-<div>
-<%= simple_form_for @spa do |f| %>
-  <div class="field">
-    <%= f.input :name %>
+<div class="container mt-3 text-start mb-3">
+  <div class="card-host text-center">
+    <h1> Update any features and transform your old spa into a new one </h1>
   </div>
 
-  <div class="field">
-    <%= f.input :address %>
-  </div>
+  <div class="registration-form mt-2 mb-3" >
+    <%= simple_form_for @spa, html: { multipart: true } do |f| %>
+      <div class="form-group mt-3">
+        <%= f.input_field :name, label: false, placeholder: 'Change the name to your like', class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.input :price %>
-  </div>
+      <div class="form-group">
+        <%= f.input_field :address, label: false, placeholder: 'Just moved? Insert your new Address', class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.input :image, as: :file %>
-  </div>
+      <div class="form-group">
+        <%= f.input_field :price, label: false, placeholder: 'Change of season? Add new price', class: "form-control" %>
+      </div>
 
-  <div class="actions">
-    <%= f.button :submit %>
+      <div class="form-group">
+        <%= f.input :images, as: :file, input_html: { multiple: true }, label: false, placeholder: 'CHange your Photos to new ones' %>
+      </div>
+      <div class="form-group d-flex justify-content-center mb-5">
+        <%= f.button :submit, 'Apply Changes', class: 'btn default-btn' %>
+      </div>
+    <% end %>
+  </div>
 </div>
-<% end %>
-  </div>
 
-<%= link_to 'Go back', spas_path %>
+<%= link_to 'Go back', spas_path, class: 'btn default-btn ms-5' %>

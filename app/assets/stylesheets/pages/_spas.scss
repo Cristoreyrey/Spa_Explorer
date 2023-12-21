@@ -28,11 +28,12 @@
 }
 
 .new-spa-container {
-  width: 80%;
-  margin: 0 auto;
+  width: 50%;
+  margin: 30px auto;
   padding: 10px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 40px 0 rgba(0, 0, 0, 0.19);
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
 }
 
 .new-spa-container img {
