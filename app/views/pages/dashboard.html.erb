@@ -1,18 +1,17 @@
 <% if current_user.host? %>
-  <%= form_with url: dashboard_path, class:"d-flex", method: :get do %>
+  <%= form_with url: dashboard_path, method: :get do %>
   <%= text_field_tag :query,
                     params[:query],
                     placeholder: "Search for your spa",
-                    class:"form-control search-input" %>
+                    class: "form-control search-input" %>
   <%= submit_tag "Search" %>
-  <% end %>
-
+<% end %>
 <div class="row">
   <div class="ms-3 p-5 col-6">
     <h1 class="text-center mt-3">My Spas</h1>
-      <div class="row">
-      <% current_user.host_spas.each do |spa| %>
-        <div class="card m-3 item-animate col-6">
+      <div class="row d-flex justify-content-center">
+      <% @spas.each do |spa| %>
+        <div class="card m-3 item-animate col-4">
           <div class="card-img" style="background-image: url(<%= cl_image_path spa&.images&.first&.key %>)"></div>
             <div class="card-info">
               <p class="text-title"><%= spa.name %></p>
@@ -51,13 +50,14 @@
   </div>
 </div>
 <% elsif current_user.guest? %>
+<% console %>
     <div class="row">
       <div class="col-8">
         <h1 class="text-center">My bookings</h1>
         <div class="row">
         <% current_user.guest_bookings.each do |booking| %>
           <div class="col-6 card m-3 item-animate">
-            <div class="card-img" style="background-image: url(<%= cl_image_path booking.spa&.images&.first.key %>)"></div>
+            <div class="card-img" style="background-image: url('<%= cl_image_path booking.spa&.images&.first.key %>')"></div>
             <div class="card-info">
               <p class="text-title"><%= booking.spa.name %></p>
               <div class="card-location">
