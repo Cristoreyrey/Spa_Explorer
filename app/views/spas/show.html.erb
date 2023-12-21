@@ -31,6 +31,6 @@
   </ul>
   <div class="btn-group mt-3">
     <%= link_to 'Edit Spa', edit_spa_path(@spa), class: 'btn default-btn' %>
-    <%= link_to 'Delete this Spa?', spas_path(@spa), method: :delete, data: { confirm: 'Sure? Your Spa will be completely erased' }, class: 'btn default-btn' %>
+    <%= link_to 'Delete this Spa?', spa_path(@spa),  data: { turbo_method: :delete, turbo_confirm: 'Are you Sure' }, class: 'btn default-btn' %>
   </div>
 </div>
