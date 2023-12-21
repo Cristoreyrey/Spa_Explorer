@@ -77,7 +77,7 @@
           </button>
         </div>
         <div class="card-info">
-          <p class="text-title"><%= spa.name %></p>
+          <%= link_to spa.name, spa_path(spa), data: { turbo: false }, class:"text-dark text-decoration-none" %>
           <div class="card-location">
             <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= spa.address %></p>
           </div>

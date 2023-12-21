@@ -5,7 +5,7 @@
       <div class="row">
       <% current_user.host_spas.each do |spa| %>
         <div class="card m-3 item-animate col-6">
-          <div class="card-img" style="background-image: url(<%= cl_image_path spa&.image&.key %>)"></div>
+          <div class="card-img" style="background-image: url(<%= cl_image_path spa&.images&.first&.key %>)"></div>
             <div class="card-info">
               <p class="text-title"><%= spa.name %></p>
               <div class="card-location">

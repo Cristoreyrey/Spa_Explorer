@@ -57,7 +57,7 @@ class SpasController < ApplicationController
     @spa = Spa.find(params[:id])
     @spa.destroy
 
-    redirect_to root_path notice: 'Spa was successfully erased'
+    redirect_to dashboard_path notice: 'Spa was successfully erased'
   end
 
 
