@@ -9,45 +9,41 @@
 </div>
 
 <div class="row">
-  <div class="p-3 d-flex flex-column col-4" data-controller="toggle-create-spa-form">
+  <div class="d-flex flex-column col-4" data-controller="toggle-create-spa-form">
     <button class="btn default-btn mx-auto mb-4" data-action="click->toggle-create-spa-form#fire">Create a Spa</button>
 
     <div class="registration-form w-75 mt-2 mb-3 p-4 d-none" data-toggle-create-spa-form-target="spa_form">
       <%= simple_form_for @spa, html: { multipart: true } do |f| %>
         <div class="form-group mt-3">
-          <%= f.input_field :name, label: false, placeholder: 'The Name of your Spa', class: "form-control" %>
+          <%= f.input :name, label: false, placeholder: 'The Name of your Spa', class: "form-control" %>
+        </div>
+
+
+        <div class="form-group">
+          <%= f.input :price, label: false, placeholder: 'Add a Price per session/day', class: "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= f.input_field :address,
-                            input_html: { data: {address_autocomplete_target: "address"}},
+          <%= f.input :rating, label: false, placeholder: 'How many stars?', class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :address,
+                            input_html: { class:"d-none", data: {address_autocomplete_target: "address"}},
                             wrapper_html: { data: { controller: "address-autocomplete", address_autocomplete_api_key_value: ENV['MAPBOX_API_KEY']}},
-                            label: false, placeholder: 'The Address', class: "form-control d-none" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.input_field :price, label: false, placeholder: 'Add a Price per session/day', class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.input_field :rating, label: false, placeholder: 'How many stars?', class: "form-control" %>
+                            label: false, placeholder: 'The Address' %>
         </div>
 
         <div class="form-group">
           <%= f.input :images, as: :file, input_html: { multiple: true }, label: false, placeholder: 'Add Photos' %>
         </div>
 
-        <div class="form-group d-flex justify-content-center mb-5">
+
+        <div class="form-group d-flex justify-content-center">
           <%= f.button :submit, class: 'btn default-btn' %>
         </div>
       <% end %>
     </div>
-
-  <div style="width: 100%; height: 600px;"
-    data-controller="map"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
   </div>
 
   <%= turbo_frame_tag 'spas', class: "d-flex p-3 col-8 row" do %>
@@ -92,3 +88,11 @@
       </div>
     <% end %>
   <% end %>
+
+<div class="rounded p-5">
+  <div style="width: 100%; height: 800px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+</div>

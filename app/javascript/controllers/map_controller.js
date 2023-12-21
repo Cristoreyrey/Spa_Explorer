@@ -14,9 +14,11 @@ export default class extends Controller {
     this.map = new mapboxgl.Map({
       container: this.element,
       style: 'mapbox://styles/seijitakahashi/clqemisol00bg01ntd5bee5zx',
+      center: [139.700464, 35.689521],
+      zoom: 2
     })
-    this.#addMarkersToMap
-    this.#fitMapToMarkers
+    this.#addMarkersToMap()
+    this.#fitMapToMarkers()
 
     this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }))
   }

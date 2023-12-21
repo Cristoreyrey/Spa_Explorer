@@ -7,7 +7,7 @@ class SpasController < ApplicationController
     @user = current_user
     @spa = Spa.new
     @spa_map = Spa.geocoded
-    @markers = @spas.map do |spa|
+    @markers = @spas.geocoded.map do |spa|
       {
         lat: spa.latitude,
         lng: spa.longitude,
