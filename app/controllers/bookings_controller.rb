@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
   def new
     @spa = Spa.find(params[:spa_id])
     @booking = Booking.new
+    authorize @booking
 
     render turbo_stream: turbo_stream.replace(:spas, partial: "bookings/turbo_frames/new", locals: { spa: @spa, booking: @booking })
   end
@@ -24,6 +25,7 @@ class BookingsController < ApplicationController
     @user = current_user
     @booking.spa = @spa
     @booking.guest = @user
+    authorize @booking
 
     if @booking.save
       redirect_to dashboard_path, notice: 'Booking was successfully created!'
@@ -34,6 +36,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking = Booking.find(params[:id])
+    authorize @booking
     @booking.destroy
 
     redirect_to dashboard_path, notice: 'Booking was successfully deleted!'
@@ -42,12 +45,14 @@ class BookingsController < ApplicationController
   def accept
     @booking = Booking.find(params[:id])
     @booking.update!(status: 1)
+    authorize @booking
     redirect_to dashboard_path, notice: 'Booking was successfully accepted!'
   end
 
   def reject
     @booking = Booking.find(params[:id])
     @booking.update!(status: 2)
+    authorize @booking
     redirect_to dashboard_path, notice: 'Booking was successfully rejected!'
   end
 
