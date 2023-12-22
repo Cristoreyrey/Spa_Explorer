@@ -31,12 +31,15 @@
     </div>
     <li> $<%= @spa.price %> / session </li>
   </ul>
-  <% if current_user.host? %>
   <div class=" d-flex justify-content-center mt-3">
-    <%= link_to 'Edit Spa', edit_spa_path(@spa), class: 'btn default-btn me-5' %>
-    <%= link_to 'Close Spa', spa_path(@spa),  data: { turbo_method: :delete, turbo_confirm: 'Are you Sure' }, class: 'btn default-btn' %>
+    <% if policy(@spa).edit? %>
+      <%= link_to 'Edit Spa', edit_spa_path(@spa), class: 'btn default-btn me-5' %>
+    <% end %>
+
+    <% if policy(@spa).destroy? %>
+      <%= link_to 'Close Spa', spa_path(@spa),  data: { turbo_method: :delete, turbo_confirm: 'Are you Sure' }, class: 'btn default-btn' %>
+    <% end %>
   </div>
-  <% end %>
 </div>
 
 <div class="container rounded-lg mt-5 mb-5">

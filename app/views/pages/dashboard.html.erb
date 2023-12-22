@@ -1,4 +1,4 @@
-<% if current_user.host? %>
+<% if current_user && current_user.host? %>
   <%= form_with url: dashboard_path, method: :get do %>
   <%= text_field_tag :query,
                     params[:query],
@@ -49,7 +49,7 @@
   </div>
 </div>
 
-<% elsif current_user.guest? %>
+<% elsif current_user && current_user.guest? %>
     <div class="row">
       <div class="ms-3 p-5 col-8">
         <h1 class="text-center">My bookings</h1>
