@@ -1,0 +1,7 @@
+<% if booking.pending? %>
+  <h5><span class="text-primary">Pending</span></h5>
+<% elsif booking.accepted? %>
+  <h5><span class="text-success">Accepted</span></h5>
+<% elsif booking.declined? %>
+  <h5><span class="text-danger">Declined</span></h5>
+<% end %>

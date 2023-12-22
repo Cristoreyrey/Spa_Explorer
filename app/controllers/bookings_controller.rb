@@ -39,6 +39,19 @@ class BookingsController < ApplicationController
     redirect_to dashboard_path, notice: 'Booking was successfully deleted!'
   end
 
+  def accept
+    @booking = Booking.find(params[:id])
+    @booking.update!(status: 1)
+    redirect_to dashboard_path, notice: 'Booking was successfully accepted!'
+  end
+
+  def reject
+    @booking = Booking.find(params[:id])
+    @booking.update!(status: 2)
+    redirect_to dashboard_path, notice: 'Booking was successfully rejected!'
+  end
+
+
   private
 
   def booking_params

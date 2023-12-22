@@ -21,7 +21,9 @@
             <div class="card-footer">
               <span class="text-title">$<%= spa.price %> / day</span>
               <div class="card-button">
-                <%= spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+                <% spa.rating.times do %>
+                  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+                <% end %>
               </div>
             </div>
         <%# <%= link_to "Delete", booking_path(booking), method: :delete, data: { confirm: 'Are you Sure' } %>
@@ -30,22 +32,25 @@
       </div>
   </div>
   <div class="col p-5">
+    <div style="position: sticky; top: 30px">
     <h1 class="text-center mt-3 mb-3">Spa's bookings</h1>
       <div class="px-5">
       <div class="row">
-        <% current_user.host_bookings.each do |booking| %>
-          <div class="card-booking-list col-6 m-2">
+        <% current_user.host_bookings.sort_by { |booking| booking.pending? ? 0 : booking.accepted? ? 1 : 2 }.each do |booking| %>
+          <div class="card-booking-list item-animate col-6 m-2">
             <p class="cookieHeading"><%= booking.spa.name %></p>
+            <%= render "bookings/states", booking: booking %>
             <p class="cookieDescription"><%= booking.date %></p>
             <p class="cookieDescription"><%= booking.guest.first_name %></p>
             <div class="buttonContainer">
-              <button class="acceptButton">Accept</button>
-              <button class="declineButton">Decline</button>
+              <%= link_to "Accept", accept_booking_path(booking), class: "btn default-btn me-1", data: { turbo_method: :patch }%>
+              <%= link_to "Decline", reject_booking_path(booking),  data: { confirm: 'Are you sure?' }, class: "btn default-btn me-1", data: { turbo_method: :patch } %>
             </div>
           </div>
         <% end %>
       </div>
     </div>
+  </div>
   </div>
 </div>
 
@@ -58,6 +63,7 @@
           <div class="col-5 card m-3 item-animate">
             <div class="card-img" style="background-image: url('<%= cl_image_path booking.spa&.images&.first.key %>')"></div>
             <div class="card-info">
+              <%= render "bookings/states", booking: booking, class:"text-center" %>
               <%= link_to booking.spa.name, spa_path(booking.spa), class:"text-dark text-decoration-none text-title" %>
               <div class="card-location">
                 <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= booking.spa.address %></p>
