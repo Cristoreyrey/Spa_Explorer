@@ -1,8 +1,16 @@
-.mapboxgl-popup {
-  max-width: 200px;
+.mapboxgl-ctrl-geocoder {
+  max-width: none !important;
+  width: 100% !important;
+  border: 1px solid lightgrey !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
-.mapboxgl-popup-content {
-  text-align: center;
-  font-family: "Open Sans", sans-serif;
+.mapboxgl-ctrl-geocoder--input {
+  &:focus {
+    outline: 0 !important;
+    border: 0.08rem solid rgba(19, 97, 242, 0.584) !important;
+    box-shadow: 0 0 0 0.3rem rgba(0,123,255,.25) !important;
+    border-radius: 2px !important;
+  }
 }
