@@ -1,6 +1,6 @@
 <div class="container w-25 p-5 bg-white registration-form">
   <%= simple_form_for [spa, booking], remote: true  do |f| %>
-  <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } }    %>
-  <%= f.button :submit, class:"default-btn" %>
+  <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } }, class:"rounded-lg"    %>
+  <%= f.button :submit, class:"default-btn d-flex justify-content-center align-items-center mx-auto" %>
   <% end %>
 </div>

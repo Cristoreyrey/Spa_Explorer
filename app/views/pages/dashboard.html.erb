@@ -2,19 +2,18 @@
   <%= form_with url: dashboard_path, method: :get do %>
   <%= text_field_tag :query,
                     params[:query],
-                    placeholder: "Search for your spa",
-                    class: "form-control search-input" %>
-  <%= submit_tag "Search" %>
+                    placeholder: "Filter your spas by name or address",
+                    class: "form-control search-input mx-auto" %>
 <% end %>
 <div class="row">
   <div class="ms-3 p-5 col-6">
     <h1 class="text-center mt-3">My Spas</h1>
       <div class="row d-flex justify-content-center">
       <% @spas.each do |spa| %>
-        <div class="card m-3 item-animate col-4">
+        <div class="card m-3 item-animate col-5">
           <div class="card-img" style="background-image: url(<%= cl_image_path spa&.images&.first&.key %>)"></div>
             <div class="card-info">
-              <p class="text-title"><%= spa.name %></p>
+              <%= link_to spa.name, spa_path(spa), class:"text-dark text-decoration-none text-title" %>
               <div class="card-location">
                 <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= spa.address %></p>
               </div>
@@ -49,37 +48,47 @@
     </div>
   </div>
 </div>
+
 <% elsif current_user.guest? %>
-<% console %>
     <div class="row">
-      <div class="col-8">
+      <div class="ms-3 p-5 col-8">
         <h1 class="text-center">My bookings</h1>
-        <div class="row">
-        <% current_user.guest_bookings.each do |booking| %>
-          <div class="col-6 card m-3 item-animate">
+        <div class="row d-flex justify-content-center">
+          <% current_user.guest_bookings.each do |booking| %>
+          <div class="col-5 card m-3 item-animate">
             <div class="card-img" style="background-image: url('<%= cl_image_path booking.spa&.images&.first.key %>')"></div>
             <div class="card-info">
-              <p class="text-title"><%= booking.spa.name %></p>
+              <%= link_to booking.spa.name, spa_path(booking.spa), class:"text-dark text-decoration-none text-title" %>
               <div class="card-location">
                 <i class="fa-solid fa-location-pin" style="color: #000000;"></i> <p class="text-body"><%= booking.spa.address %></p>
               </div>
             </div>
             <div class="card-footer">
-              <span class="text-title">$<%= booking.spa.price %> / day</span>
+              <span class="text-title">$<%= booking.spa.price %>/session</span>
               <div class="card-button">
-                <%= booking.spa.rating %>  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+                <% booking.spa.rating.times do %>
+                  <i class="fa-solid fa-star" style="color: #ffea00;"></i>
+                <% end %>
               </div>
             </div>
-          <%= booking.date %>
-        <%= link_to "Delete", booking_path(booking), data: { turbo_method: :delete, turbo_confirm: 'Are you Sure' } %>
-    </div>
+            <span class="text-title text-center mb-3"><%= booking.date %></span>
+            <div class="d-flex align-items-center justify-content-center">
+              <%= link_to "Cancel reservation", booking_path(booking), class:"btn default-btn mt-2", data: { turbo_method: :delete, turbo_confirm: 'Are you Sure' } %>
+            </div>
+          </div>
         <% end %>
         </div>
       </div>
-      <div class="col-4">
-        <h1 class="text-center">
-          PROFILE INFO
-        </h1>
-      </div-col-6>
-    </div>
+      <div class="col p-5">
+        <div class="d-flex flex-column justify-content-center align-items-center stick">
+        <h1 class="text-center mt-3 mb-3">My profile</h1>
+            <div class="card-booking-list col-6 m-2">
+              <p class="cookieHeading"><%= current_user.first_name %> <%= current_user.last_name %></p>
+              <p class="cookieDescription"><%= current_user.email %></p>
+              <div class="buttonContainer">
+                <%= link_to "Edit profile", edit_user_registration_path, class:"btn default-btn mt-2" %>
+              </div>
+            </div>
+        </div>
+      </div>
 <% end %>
