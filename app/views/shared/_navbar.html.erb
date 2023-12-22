@@ -65,7 +65,7 @@
           <li>
           </li>
           <li>
-          <% if current_user && current_user.host? %>
+          <% if user_signed_in? %>
             <li class="nav-item list-group-item me-2">
               <%= link_to "My Dashboard", dashboard_path, class: "btn default-btn text-black" %>
             </li>
