@@ -38,8 +38,7 @@
 
 <%# Dont move anything above this line! %>
 
-<% if current_user.host? %>
-
+<% if current_user && current_user.host? %>
   <div class="d-flex flex-column" data-controller="toggle-create-spa-form">
     <button class="btn default-btn mx-auto mb-4" data-action="click->toggle-create-spa-form#fire">Open up your Spa</button>
     <div class="registration-form w-25 mt-2 mb-3 p-4 d-none" data-toggle-create-spa-form-target="spa_form">
@@ -121,7 +120,7 @@
   <% end %>
   </div>
 
-<% elsif current_user.guest? %>
+<% elsif current_user && current_user.guest? %>
 
   <div class="rowjustify-content-center">
     <%= turbo_frame_tag 'spas', class: "d-flex justify-content-center flex-wrap" do %>
