@@ -1,9 +1,9 @@
-<div class="container mt-3 text-start mb-3">
-  <div class="card-host text-center">
-    <h1> Update any features and transform your old spa into a new one </h1>
+<div class="container mt-4 text-start mb-5 edit-container ">
+  <div class="card-host text-center mb-2 ">
+    <h1> Update your business features and rebrand your spa </h1>
   </div>
 
-  <div class="registration-form mt-2 mb-3" >
+  <div class="registration-form mt-2 mb-3 forma-edit" >
     <%= simple_form_for @spa, html: { multipart: true } do |f| %>
       <div class="form-group mt-3">
         <%= f.input_field :name, label: false, placeholder: 'Change the name to your like', class: "form-control" %>
@@ -25,6 +25,7 @@
       </div>
     <% end %>
   </div>
+  <div class="d-flex justify-content-center">
+    <%= link_to 'Go back', spa_path(@spa), class: 'btn default-btn mb-2 mt-2' %>
+  </div>
 </div>
-
-<%= link_to 'Go back', spas_path, class: 'btn default-btn ms-5' %>

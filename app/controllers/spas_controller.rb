@@ -42,7 +42,7 @@ class SpasController < ApplicationController
     authorize @spa
     if @spa.save
       update_user_to_host
-      render turbo_stream: turbo_stream.replace(:spas, partial: "spas/turbo_frames/spas", locals: { spas: Spa.all })
+      redirect_to root_path, notice: 'Your Spa was successfully created!'
     else
       render :new, status: :unprocessable_entity
     end
