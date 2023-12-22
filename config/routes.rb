@@ -13,7 +13,12 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create]
   end
 
-  resources :bookings, only: [:show, :index, :destroy]
+  resources :bookings, only: [:show, :index, :destroy] do
+    member do
+      patch :accept
+      patch :reject
+    end
+  end
 
   get 'dashboard', to: 'pages#dashboard'
   # Defines the root path route ("/")
