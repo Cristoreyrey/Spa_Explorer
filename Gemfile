@@ -17,6 +17,7 @@ gem "devise"
 
 gem "cloudinary"
 gem "geocoder"
+gem 'dotenv-rails', groups: [:development, :test]
 gem "pg_search"
 
 # Use the Puma web server [https://github.com/puma/puma]
